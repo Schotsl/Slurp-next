@@ -6,13 +6,14 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "check": "vue-cli-service lint --no-fix",
-    "check": "vue-cli-service lint --no-fix",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "chart.js": "^3.6.0",
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-chart-3": "^0.5.11"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",
