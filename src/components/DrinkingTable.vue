@@ -2,6 +2,7 @@
   <table>
     <thead>
       <tr>
+        <th></th>
         <th>Name</th>
         <th>Sips</th>
         <th>Shots</th>
@@ -9,6 +10,7 @@
     </thead>
     <tbody>
       <tr v-for="player in sortedPlayers" :key="player.uuid">
+        <td class="image"><div :style="generateStyle(player)"></div></td>
         <td>{{ player.username }}</td>
         <td>{{ compressTimeslices(player).sips }}</td>
         <td>{{ compressTimeslices(player).shots }}</td>
@@ -41,6 +43,10 @@ export default defineComponent({
       });
 
       return remaining;
+    },
+
+    generateStyle(player: Player) {
+      return `background-image: url('https://crafatar.com/avatars/${player.uuid}')`;
     },
   },
 
@@ -91,6 +97,20 @@ table {
     &:first-of-type {
       color: #009879;
       font-weight: bold;
+    }
+
+    .image {
+      width: 1px;
+      padding: 0.5rem 1rem;
+
+      white-space: nowrap;
+
+      div {
+        width: 1.5rem;
+        height: 1.5rem;
+
+        background-size: contain;
+      }
     }
   }
 }
