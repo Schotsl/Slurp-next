@@ -1,8 +1,9 @@
 <template>
   <div>
-    <drinking-graph :players="players" type="sips" />
+    <!-- <drinking-graph :players="players" type="sips" />
     <drinking-graph :players="players" type="shots" />
-    <drinking-bars :players="players" />
+    <drinking-bars :players="players" /> -->
+    <drinking-table :players="players" />
   </div>
 </template>
 
@@ -11,8 +12,9 @@ import { Chart, registerables } from "chart.js";
 import { defineComponent } from "vue";
 import { Player } from "./types";
 
-import DrinkingGraph from "./components/DrinkingGraph.vue";
-import DrinkingBars from "./components/DrinkingBars.vue";
+// import DrinkingGraph from "./components/DrinkingGraph.vue";
+// import DrinkingBars from "./components/DrinkingBars.vue";
+import DrinkingTable from "./components/DrinkingTable.vue";
 
 Chart.register(...registerables);
 
@@ -26,8 +28,9 @@ export default defineComponent({
   },
 
   components: {
-    DrinkingGraph,
-    DrinkingBars,
+    DrinkingTable,
+    // DrinkingGraph,
+    // DrinkingBars,
   },
 
   methods: {
@@ -57,6 +60,7 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  // font-size: 42px;
   margin-top: 60px;
 }
 </style>
