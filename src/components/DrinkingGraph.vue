@@ -1,6 +1,6 @@
 <template>
   <div>
-    <line-chart :chartData="barData" :options="options" />
+    <line-chart :chartData="barData" :options="options" style="height: 100%" />
   </div>
 </template>
 
@@ -19,19 +19,18 @@ export default defineComponent({
           x: {
             ticks: {
               font: {
-                size: 22,
+                size: 42,
+              },
+            },
+          },
+          y: {
+            ticks: {
+              font: {
+                size: 42,
               },
             },
           },
         },
-        // scales: {
-        //   y: {
-        //     stacked: true,
-        //   },
-        //   x: {
-        //     stacked: true,
-        //   },
-        // },
         plugins: {
           legend: {
             display: false,

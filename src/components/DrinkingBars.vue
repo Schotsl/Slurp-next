@@ -1,6 +1,6 @@
 <template>
   <div>
-    <bar-chart :chartData="barData" :options="options" />
+    <bar-chart :chartData="barData" :options="options" style="height: 100%" />
   </div>
 </template>
 
@@ -18,9 +18,19 @@ export default defineComponent({
         scales: {
           y: {
             stacked: true,
+            ticks: {
+              font: {
+                size: 42,
+              },
+            },
           },
           x: {
             stacked: true,
+            ticks: {
+              font: {
+                size: 42,
+              },
+            },
           },
         },
         plugins: {
