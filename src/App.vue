@@ -1,5 +1,9 @@
 <template>
-  <drinking-bars :players="players" />
+  <div>
+    <drinking-graph :players="players" type="sips" />
+    <drinking-graph :players="players" type="shots" />
+    <drinking-bars :players="players" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -7,6 +11,7 @@ import { Chart, registerables } from "chart.js";
 import { defineComponent } from "vue";
 import { Player } from "./types";
 
+import DrinkingGraph from "./components/DrinkingGraph.vue";
 import DrinkingBars from "./components/DrinkingBars.vue";
 
 Chart.register(...registerables);
@@ -21,31 +26,26 @@ export default defineComponent({
   },
 
   components: {
+    DrinkingGraph,
     DrinkingBars,
   },
 
   methods: {
     async loadGraph() {
-      const response = await fetch("https://slurp.deno.dev/v1/graph");
+      const response = await fetch(
+        "http://localhost:8080/v1/graph?server=7b939bcd-14ac-4d73-b8b7-6aa311ffbfb5"
+      );
       const parsed = await response.json();
       const players = parsed.players;
 
-      this.players = await Promise.all(
-        players.map(async (player: Player) => {
-          const response = await fetch(
-            `https://api.ashcon.app/mojang/v2/user/${player.uuid}`
-          );
-          const parsed = await response.json();
-          const username = response.status === 200 ? parsed.username : "Oops";
-
-          return { ...player, username };
-        })
-      );
+      this.players = players;
     },
   },
 
   mounted() {
+    // setInterval(() => {
     this.loadGraph();
+    // }, 1000);
   },
 });
 </script>

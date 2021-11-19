@@ -64,22 +64,25 @@ export default defineComponent({
     barData() {
       const taken: number[] = [];
       const labels: string[] = [];
-      const remaining: number[] = [];
+      const colors: string[] = [];
+      const remain: number[] = [];
 
       if (this.players) {
         this.players.forEach((player) => {
           let takenSips = 0;
-          let remainingSips = 0;
+          let remainSips = 0;
 
           takenSips += this.compressTimeslices(player).taken.sips;
           takenSips += this.compressTimeslices(player).taken.shots * 20;
 
-          remainingSips += this.compressTimeslices(player).remaining.sips;
-          remainingSips += this.compressTimeslices(player).remaining.shots * 20;
+          remainSips += this.compressTimeslices(player).remaining.sips;
+          remainSips += this.compressTimeslices(player).remaining.shots * 20;
 
-          remaining.push(remainingSips);
-          labels.push(player.username);
           taken.push(takenSips);
+          remain.push(-remainSips);
+
+          colors.push(player.color);
+          labels.push(player.username);
         });
       }
 
@@ -87,14 +90,15 @@ export default defineComponent({
         labels,
         datasets: [
           {
-            label: "Remaining",
-            data: remaining,
-            backgroundColor: "#3E92CC",
-          },
-          {
             label: "Taken",
             data: taken,
-            backgroundColor: "#0A2463",
+            backgroundColor: colors,
+          },
+          {
+            label: "Remaining",
+            data: remain,
+            borderColor: colors,
+            borderWidth: 2,
           },
         ],
       };
