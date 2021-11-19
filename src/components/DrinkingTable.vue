@@ -62,7 +62,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 table {
-  min-width: 400px;
+  flex: 1;
+  // min-width: 400px;
   text-align: left;
   border-collapse: collapse;
 

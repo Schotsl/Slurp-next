@@ -1,5 +1,7 @@
 <template>
-  <bar-chart :chartData="barData" :options="options" />
+  <div>
+    <bar-chart :chartData="barData" :options="options" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -19,6 +21,11 @@ export default defineComponent({
           },
           x: {
             stacked: true,
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
           },
         },
       },
@@ -107,4 +114,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+div {
+  flex: 1;
+}
+</style>

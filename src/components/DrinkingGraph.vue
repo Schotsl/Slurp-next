@@ -1,5 +1,7 @@
 <template>
-  <line-chart :chartData="barData" :options="options" />
+  <div>
+    <line-chart :chartData="barData" :options="options" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,6 +15,15 @@ export default defineComponent({
   data() {
     return {
       options: {
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 22,
+              },
+            },
+          },
+        },
         // scales: {
         //   y: {
         //     stacked: true,
@@ -21,6 +32,11 @@ export default defineComponent({
         //     stacked: true,
         //   },
         // },
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
       },
     };
   },
@@ -116,4 +132,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+div {
+  flex: 1;
+}
+</style>

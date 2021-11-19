@@ -1,9 +1,18 @@
 <template>
   <div>
-    <!-- <drinking-graph :players="players" type="sips" />
-    <drinking-graph :players="players" type="shots" />
-    <drinking-bars :players="players" /> -->
-    <drinking-table :players="players" />
+    <div style="display: flex">
+      <drinking-table :players="players" />
+      <div class="divider"></div>
+      <drinking-bars :players="players" />
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="display: flex">
+      <drinking-graph :players="players" type="sips" />
+      <div class="divider"></div>
+      <drinking-graph :players="players" type="shots" />
+    </div>
   </div>
 </template>
 
@@ -12,8 +21,8 @@ import { Chart, registerables } from "chart.js";
 import { defineComponent } from "vue";
 import { Player } from "./types";
 
-// import DrinkingGraph from "./components/DrinkingGraph.vue";
-// import DrinkingBars from "./components/DrinkingBars.vue";
+import DrinkingGraph from "./components/DrinkingGraph.vue";
+import DrinkingBars from "./components/DrinkingBars.vue";
 import DrinkingTable from "./components/DrinkingTable.vue";
 
 Chart.register(...registerables);
@@ -29,8 +38,8 @@ export default defineComponent({
 
   components: {
     DrinkingTable,
-    // DrinkingGraph,
-    // DrinkingBars,
+    DrinkingGraph,
+    DrinkingBars,
   },
 
   methods: {
@@ -60,7 +69,13 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  padding: 5vw;
   // font-size: 42px;
-  margin-top: 60px;
+  // margin-top: 60px;
+}
+
+.divider {
+  width: 5vw;
+  height: 5vw;
 }
 </style>
