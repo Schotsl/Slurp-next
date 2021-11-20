@@ -60,11 +60,13 @@ export default defineComponent({
       };
 
       player.timeline.forEach((timeslice) => {
-        taken.sips += timeslice.taken.sips;
-        taken.shots += timeslice.taken.shots;
+        if (timeslice.giveable) {
+          taken.sips += timeslice.taken.sips;
+          taken.shots += timeslice.taken.shots;
 
-        remaining.sips += timeslice.remaining.sips;
-        remaining.shots += timeslice.remaining.shots;
+          remaining.sips += timeslice.remaining.sips;
+          remaining.shots += timeslice.remaining.shots;
+        }
       });
 
       return {
@@ -77,7 +79,7 @@ export default defineComponent({
   computed: {
     barData() {
       const date = new Date();
-      const current = date.getHours();
+      const current = date.getHours() - 1;
 
       const labels: string[] = [];
 
@@ -102,7 +104,7 @@ export default defineComponent({
         labels.forEach((label, index) => {
           const previous = index === 0 ? 0 : data[index - 1];
           const timeslice = player.timeline.find(
-            (timeslice) => timeslice.time === label
+            (timeslice) => timeslice.time === label && timeslice.giveable === false
           );
 
           const value = timeslice
