@@ -104,7 +104,7 @@ export default defineComponent({
         labels.forEach((label, index) => {
           const previous = index === 0 ? 0 : data[index - 1];
           const timeslice = player.timeline.find(
-            (timeslice) => timeslice.time === label && timeslice.giveable === false
+            (timeslice) => timeslice.time === label
           );
 
           const value = timeslice
