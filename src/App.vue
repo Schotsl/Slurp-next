@@ -65,7 +65,7 @@ export default defineComponent({
   mounted() {
     setInterval(() => {
     this.loadGraph();
-    }, 1000);
+    }, 10000);
   },
 });
 </script>
