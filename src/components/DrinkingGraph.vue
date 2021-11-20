@@ -60,13 +60,11 @@ export default defineComponent({
       };
 
       player.timeline.forEach((timeslice) => {
-        if (timeslice.giveable) {
           taken.sips += timeslice.taken.sips;
           taken.shots += timeslice.taken.shots;
 
           remaining.sips += timeslice.remaining.sips;
           remaining.shots += timeslice.remaining.shots;
-        }
       });
 
       return {
