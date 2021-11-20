@@ -4,7 +4,7 @@ export interface Consumable {
 }
 
 export interface Timeslice {
-  hour?: number | undefined;
+  time?: string | undefined;
   taken: Consumable;
   remaining: Consumable;
 }

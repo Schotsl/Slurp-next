@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <bar-chart :chartData="barData" :options="options" style="height: 100%" />
-  </div>
+  <!-- <div style="display: flex;"> -->
+  <bar-chart :chartData="barData" :options="options" style="height: 100%" />
+  <!-- </div> -->
 </template>
 
 <script lang="ts">
@@ -20,7 +20,7 @@ export default defineComponent({
             stacked: true,
             ticks: {
               font: {
-                size: 42,
+                size: 22,
               },
             },
           },
@@ -28,7 +28,7 @@ export default defineComponent({
             stacked: true,
             ticks: {
               font: {
-                size: 42,
+                size: 18,
               },
             },
           },
@@ -96,7 +96,7 @@ export default defineComponent({
           remainSips += this.compressTimeslices(player).remaining.shots * 20;
 
           taken.push(takenSips);
-          remain.push(-remainSips);
+          remain.push(remainSips);
 
           colors.push(player.color);
           labels.push(player.username);

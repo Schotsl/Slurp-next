@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <line-chart :chartData="barData" :options="options" style="height: 100%" />
-  </div>
+  <line-chart :chartData="barData" :options="options" style="height: 100%" />
 </template>
 
 <script lang="ts">
@@ -19,14 +17,14 @@ export default defineComponent({
           x: {
             ticks: {
               font: {
-                size: 42,
+                size: 22,
               },
             },
           },
           y: {
             ticks: {
               font: {
-                size: 42,
+                size: 22,
               },
             },
           },
@@ -81,17 +79,18 @@ export default defineComponent({
       const date = new Date();
       const current = date.getHours();
 
-      const hours: number[] = [];
       const labels: string[] = [];
 
-      for (let i = 24; i > 0; i--) {
-        const hour = current - i < 0 ? current - i + 24 : current - i;
+      for (let i = 6; i > 0; i--) {
+        const hourInteger = current - i < 0 ? current - i + 24 : current - i;
+        const hourFormatted = `${hourInteger.toString().padStart(2, "0")}`;
 
-        const string = hour.toString();
-        const format = `${string.padStart(2, "0")}:00`;
-
-        hours.push(hour);
-        labels.push(format);
+        for (let j = 0; j < 4; j++) {
+          const minuteInteger = j * 15;
+          const minuteFormatted = `${minuteInteger.toString().padStart(2, "0")}`;
+          
+          labels.push(`${hourFormatted}:${minuteFormatted}`);
+        }
       }
 
       const datasets = this.players!.map((player) => {
@@ -100,10 +99,10 @@ export default defineComponent({
 
         const data: number[] = [];
 
-        hours.forEach((hour, index) => {
+        labels.forEach((label, index) => {
           const previous = index === 0 ? 0 : data[index - 1];
           const timeslice = player.timeline.find(
-            (timeslice) => timeslice.hour === hour
+            (timeslice) => timeslice.time === label
           );
 
           const value = timeslice

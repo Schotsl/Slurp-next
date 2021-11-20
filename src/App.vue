@@ -1,17 +1,25 @@
 <template>
   <div class="container">
-    <div style="display: flex">
+    <div style="display: flex; height: 50%;">
+      <div style="padding: 2rem; width: 50%;">
       <drinking-table :players="players" />
-      <!-- <div class="divider"></div> -->
+      </div>
+      
+      <div style="padding: 2rem; width: 50%;">
       <drinking-bars :players="players" />
+      </div>
     </div>
 
     <!-- <div class="divider"></div> -->
 
-    <div style="display: flex">
+    <div style="display: flex; height: 50%;">
+      <div style="padding: 2rem; width: 50%;">
       <drinking-graph :players="players" type="sips" />
+      </div>
       <!-- <div class="divider"></div> -->
+      <div style="padding: 2rem; width: 50%;">
       <drinking-graph :players="players" type="shots" />
+      </div>
     </div>
   </div>
 </template>
@@ -45,7 +53,7 @@ export default defineComponent({
   methods: {
     async loadGraph() {
       const response = await fetch(
-        "https://slurp.deno.dev/v1/graph?server=7b939bcd-14ac-4d73-b8b7-6aa311ffbfb5"
+        "https://slurp.deno.dev/v1/graph?server=3b011caf-1f0d-4406-826f-f07ba26164c8"
       );
       const parsed = await response.json();
       const players = parsed.players;
@@ -55,10 +63,9 @@ export default defineComponent({
   },
 
   mounted() {
-    // setInterval(() => {
-    console.log("adsf");
+    setInterval(() => {
     this.loadGraph();
-    // }, 1000);
+    }, 1000);
   },
 });
 </script>
@@ -67,10 +74,15 @@ export default defineComponent({
 html,
 body {
   width: 100vw;
-  font-size: 70px;
   height: 100vh;
   margin: 0;
+  font-size: 1rem;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 #app {
   height: 100%;
   width: 100%;
@@ -78,12 +90,12 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  box-sizing: border-box;
-  color: #2c3e50;
+  // text-align: center;
+  // box-sizing: border-box;
+  // color: #2c3e50;
   // height: 100vh;
   // width: 100vw;
-  padding: 5vw;
+  // padding: 5vw;
   // font-size: 42px;
   // margin-top: 60px;
 
@@ -94,18 +106,13 @@ body {
 
   .container {
     width: 100%;
-    display: flex;
     height: 100%;
+    display: flex;
     flex-direction: column;
 
-    div {
-      flex: 1;
-    }
+    // div {
+    //   flex: 1;
+    // }
   }
-}
-
-.divider {
-  width: 5vw;
-  height: 5vw;
 }
 </style>
