@@ -6,13 +6,13 @@ export interface Consumable {
 export interface Timeslice {
   time?: string | undefined;
   taken: Consumable;
+  giveable?: boolean | undefined;
   remaining: Consumable;
 }
 
 export interface Player {
-  uuid: string;
-  color: string;
-  server: string;
-  username: string;
-  timeline: Timeslice[];
+  uuid: string,
+  username: string,
+  sips: number,
+  shots: number,
 }

@@ -47,34 +47,8 @@ export default defineComponent({
   },
 
   props: {
-    players: Array as PropType<Player[]>,
-  },
-
-  methods: {
-    compressTimeslices(player: Player): Timeslice {
-      let taken = {
-        sips: 0,
-        shots: 0,
-      };
-
-      let remaining = {
-        sips: 0,
-        shots: 0,
-      };
-
-      player.timeline.forEach((timeslice) => {
-        taken.sips += timeslice.taken.sips;
-        taken.shots += timeslice.taken.shots;
-
-        remaining.sips += timeslice.remaining.sips;
-        remaining.shots += timeslice.remaining.shots;
-      });
-
-      return {
-        taken,
-        remaining,
-      };
-    },
+    todo: Array as PropType<Player[]>,
+    taken: Array as PropType<Player[]>,
   },
 
   computed: {
@@ -84,21 +58,21 @@ export default defineComponent({
       const colors: string[] = [];
       const remain: number[] = [];
 
-      if (this.players) {
-        this.players.forEach((player) => {
+      if (this.todo) {
+        this.todo.forEach((player) => {
           let takenSips = 0;
           let remainSips = 0;
 
-          takenSips += this.compressTimeslices(player).taken.sips;
-          takenSips += this.compressTimeslices(player).taken.shots * 20;
+          // takenSips += this.compressTimeslices(player).taken.sips;
+          // takenSips += this.compressTimeslices(player).taken.shots * 20;
 
-          remainSips += this.compressTimeslices(player).remaining.sips;
-          remainSips += this.compressTimeslices(player).remaining.shots * 20;
+          // remainSips += this.compressTimeslices(player).remaining.sips;
+          // remainSips += this.compressTimeslices(player).remaining.shots * 20;
 
-          taken.push(takenSips);
-          remain.push(remainSips);
+          taken.push(1);
+          remain.push(1);
 
-          colors.push(player.color);
+          colors.push('red');
           labels.push(player.username);
         });
       }

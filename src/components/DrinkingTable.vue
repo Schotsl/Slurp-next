@@ -9,16 +9,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="player in sortedPlayers" :key="player.uuid">
+      <tr v-for="player in todo" :key="player.uuid">
         <td class="image"><div :style="generateStyle(player)"></div></td>
         <td style="font-weight: 600" :style="generateColor(player)">
           {{ player.username }}
         </td>
         <td :style="generateColor(player)">
-          {{ compressTimeslices(player).sips }}
+          {{ player.sips }}
         </td>
         <td :style="generateColor(player)">
-          {{ compressTimeslices(player).shots }}
+          {{ player.shots }}
         </td>
       </tr>
     </tbody>
@@ -33,45 +33,45 @@ export default defineComponent({
   name: "DrinkingTable",
 
   props: {
-    players: Array as PropType<Player[]>,
+    todo: Array as PropType<Player[]>,
   },
 
   methods: {
-    compressTimeslices(player: Player): Consumable {
-      let remaining = {
-        sips: 0,
-        shots: 0,
-      };
+    // compressTimeslices(player: Player): Consumable {
+      // let remaining = {
+      //   sips: 0,
+      //   shots: 0,
+      // };
 
-      player.timeline.forEach((timeslice) => {
-        remaining.sips += timeslice.remaining.sips;
-        remaining.shots += timeslice.remaining.shots;
-      });
+      // player.timeline.forEach((timeslice) => {
+      //   remaining.sips += timeslice.remaining.sips;
+      //   remaining.shots += timeslice.remaining.shots;
+      // });
 
-      return remaining;
-    },
+      // return remaining;
+    // },
 
     generateStyle(player: Player) {
       return `background-image: url('https://crafatar.com/avatars/${player.uuid}')`;
     },
 
     generateColor(player: Player) {
-      return `color: ${player.color};`;
+      return `color: black;`;
     },
   },
 
   computed: {
-    sortedPlayers(): Player[] {
-      return [...this.players!].sort((first, second) => {
-        const firstCompressed = this.compressTimeslices(first);
-        const secondCompressed = this.compressTimeslices(second);
+    // sortedPlayers(): Player[] {
+    //   return [...this.players!].sort((first, second) => {
+    //     const firstCompressed = this.compressTimeslices(first);
+    //     const secondCompressed = this.compressTimeslices(second);
 
-        const firstSum = firstCompressed.shots * 20 + firstCompressed.sips;
-        const secondSum = secondCompressed.shots * 20 + secondCompressed.sips;
+    //     const firstSum = firstCompressed.shots * 20 + firstCompressed.sips;
+    //     const secondSum = secondCompressed.shots * 20 + secondCompressed.sips;
 
-        return firstSum > secondSum ? 1 : -1;
-      });
-    },
+    //     return firstSum > secondSum ? 1 : -1;
+    //   });
+    // },
   },
 });
 </script>

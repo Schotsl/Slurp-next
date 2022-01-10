@@ -2,11 +2,11 @@
   <div class="container">
     <div style="display: flex; height: 50%;">
       <div style="padding: 2rem; width: 50%;">
-      <drinking-table :players="players" />
+      <drinking-table :todo="todo" />
       </div>
       
       <div style="padding: 2rem; width: 50%;">
-      <drinking-bars :players="players" />
+      <drinking-bars :taken="taken" :todo="todo" />
       </div>
     </div>
 
@@ -14,11 +14,11 @@
 
     <div style="display: flex; height: 50%;">
       <div style="padding: 2rem; width: 50%;">
-      <drinking-graph :players="players" type="sips" />
+      <!-- <drinking-graph :players="players" type="sips" /> -->
       </div>
       <!-- <div class="divider"></div> -->
       <div style="padding: 2rem; width: 50%;">
-      <drinking-graph :players="players" type="shots" />
+      <!-- <drinking-graph :players="players" type="shots" /> -->
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@ import { Chart, registerables } from "chart.js";
 import { defineComponent } from "vue";
 import { Player } from "./types";
 
-import DrinkingGraph from "./components/DrinkingGraph.vue";
+// import DrinkingGraph from "./components/DrinkingGraph.vue";
 import DrinkingBars from "./components/DrinkingBars.vue";
 import DrinkingTable from "./components/DrinkingTable.vue";
 
@@ -40,32 +40,55 @@ export default defineComponent({
 
   data() {
     return {
-      players: [] as Player[],
+      todo: [] as Player[],
+      taken: [] as Player[],
     };
   },
 
   components: {
     DrinkingTable,
-    DrinkingGraph,
+    // DrinkingGraph,
     DrinkingBars,
   },
 
   methods: {
     async loadGraph() {
-      const response = await fetch(
-        "https://slurp.deno.dev/v1/graph?server=3b011caf-1f0d-4406-826f-f07ba26164c8"
-      );
-      const parsed = await response.json();
-      const players = parsed.players;
+      const socket = new WebSocket('ws://localhost:8080/v1/player/ws');
 
-      this.players = players;
+      socket.addEventListener('message', (event) => {
+        if (event.data === "Please provide your Authentication header.") {
+          console.log('Sending authentication');
+          socket.send('Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZmEwNzM0NDUtZmYyMi00MmUyLWFhNjEtNTk1NWRjMzhmYzU0In0.yZc3-1NgMKaLdE_bPx3rbLzpZA6XNveEooijxsGF2AtXkmv7-pm6WCM9OY07xNhFtZuUlZ82ZNeex9DqwSI7nQ');
+          return;
+        }
+
+        if (event.data === "Authorized successfully!") {
+          console.log('Authenticated successfully');
+          return;
+        }
+        console.log(event.data);
+        const parsed = JSON.parse(event.data);
+
+        this.todo = parsed.todo;
+        this.taken = parsed.taken;
+
+        console.log(parsed);
+    // console.log(parsed);
+});
+      // const response = await fetch(
+      //   "https://slurp.deno.dev/v1/graph?server=3b011caf-1f0d-4406-826f-f07ba26164c8"
+      // );
+      // const parsed = await response.json();
+      // const players = parsed.players;
+
+      // this.players = players;
     },
   },
 
   mounted() {
-    setInterval(() => {
+    // setInterval(() => {
     this.loadGraph();
-    }, 10000);
+    // }, 10000);
   },
 });
 </script>
