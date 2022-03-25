@@ -25,8 +25,9 @@ export default {
   computed: {
     data() {
       const players = this.remaining.map((row) => {
-        const { username, remaining_sips, remaining_shots } = row;
+        const { color, username, remaining_sips, remaining_shots } = row;
         return {
+          color,
           username,
           taken_sips: 0,
           taken_shots: 0,
@@ -45,6 +46,7 @@ export default {
           player.taken_shots = row.taken_shots;
         } else {
           players.push({
+            color: row.color,
             username: row.username,
             taken_sips: row.taken_sips,
             taken_shots: row.taken_shots,
@@ -55,6 +57,7 @@ export default {
       });
 
       const taken = [];
+      const colors = [];
       const labels = [];
       const remaining = [];
 
@@ -69,6 +72,7 @@ export default {
         second += player.remaining_shots * 20;
 
         taken.push(first);
+        colors.push(player.color);
         labels.push(player.username);
         remaining.push(second);
       });
@@ -79,13 +83,13 @@ export default {
           {
             data: taken,
             label: "Taken",
-            backgroundColor: "#0069d9",
+            backgroundColor: colors,
           },
           {
             data: remaining,
             label: "Remaining",
             borderWidth: 2,
-            borderColor: "#0069d9",
+            borderColor: colors,
           },
         ],
       };
@@ -137,7 +141,7 @@ section {
   width: 50vw;
   height: 50vh;
 
-  padding: 4rem;
+  padding: 3rem;
   background: #212529;
   box-sizing: border-box;
 }

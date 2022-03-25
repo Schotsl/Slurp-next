@@ -1,6 +1,7 @@
 <template>
   <section>
-    <LineChart :chartData="data" :options="options" style="width: 100%" />
+    <h1>{{ title }}</h1>
+    <LineChart :chartData="data" :options="options" style="width: 100%; height: 100%" />
   </section>
 </template>
 
@@ -23,6 +24,9 @@ export default {
   },
 
   computed: {
+    title() {
+      return this.target === "shots" ? "Shots" : "Sips"
+    },
     data() {
       const dates = [];
       const labels = [];
@@ -58,7 +62,7 @@ export default {
 
         const dataset = datasets.find((dataset) => dataset.uuid === graph.uuid);
 
-        const { username, uuid, sips, shots } = graph;
+        const { username, uuid, sips, shots, color } = graph;
 
         const entry = { sips, shots, timestamp };
 
@@ -69,7 +73,7 @@ export default {
             label: username,
             summary: [entry],
             timestamp,
-            borderColor: "#007bff",
+            borderColor: color,
           });
 
           return;
@@ -153,9 +157,17 @@ export default {
 section {
   width: 50vw;
   height: 50vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
 
-  padding: 4rem;
+  padding: 3rem;
   background: #212529;
   box-sizing: border-box;
+
+  h1 {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
 }
 </style>

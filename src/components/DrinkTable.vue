@@ -1,19 +1,19 @@
 <template>
   <table>
     <tr>
-      <th></th>
       <th>Username</th>
       <th>Sips</th>
       <th>Shots</th>
+      <th></th>
     </tr>
 
-    <tr v-for="remain in remaining" :key="remain.uuid">
-      <td style="width: 2rem">
-        <img :src="skinImage(remain.uuid)" :alt="skinAlt(remain.username)" />
-      </td>
+    <tr v-for="remain in remaining" :key="remain.uuid" :style="skinColor(remain.color)">
       <td>{{ remain.username }}</td>
       <td>{{ remain.remaining_sips }}</td>
       <td>{{ remain.remaining_shots }}</td>
+      <td style="width: 2rem">
+        <img :src="skinImage(remain.uuid)" :alt="skinAlt(remain.username)" />
+      </td>
     </tr>
   </table>
 </template>
@@ -36,6 +36,9 @@ export default {
 
       return `Image of ${username}${appendage} Minecraft skin.`;
     },
+    skinColor(color) {
+      return `color: ${color}`;
+    }
   },
 };
 </script>
@@ -46,7 +49,7 @@ table {
   height: 50vh;
 
   color: #fff;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
   background: #212529;
 
   text-align: left;
