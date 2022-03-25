@@ -35,7 +35,7 @@ export default {
 
   mounted() {
     // Create WebSocket connection.
-    const socket = new WebSocket("ws://localhost:8080/v1/socket");
+    const socket = new WebSocket("ws://192.168.1.165:8080/v1/socket");
 
     console.log("Connecting to Slurp");
 

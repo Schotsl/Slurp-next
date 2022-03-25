@@ -7,7 +7,11 @@
       <th></th>
     </tr>
 
-    <tr v-for="remain in remaining" :key="remain.uuid" :style="skinColor(remain.color)">
+    <tr
+      v-for="remain in remaining"
+      :key="remain.uuid"
+      :style="skinColor(remain.color)"
+    >
       <td>{{ remain.username }}</td>
       <td>{{ remain.remaining_sips }}</td>
       <td>{{ remain.remaining_shots }}</td>
@@ -38,7 +42,7 @@ export default {
     },
     skinColor(color) {
       return `color: ${color}`;
-    }
+    },
   },
 };
 </script>

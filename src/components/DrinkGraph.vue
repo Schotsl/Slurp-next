@@ -1,7 +1,11 @@
 <template>
   <section>
     <h1>{{ title }}</h1>
-    <LineChart :chartData="data" :options="options" style="width: 100%; height: 100%" />
+    <LineChart
+      :chartData="data"
+      :options="options"
+      style="width: 100%; height: 100%"
+    />
   </section>
 </template>
 
@@ -25,7 +29,7 @@ export default {
 
   computed: {
     title() {
-      return this.target === "shots" ? "Shots" : "Sips"
+      return this.target === "shots" ? "Shots" : "Sips";
     },
     data() {
       const dates = [];
