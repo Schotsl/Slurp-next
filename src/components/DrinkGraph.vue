@@ -57,13 +57,6 @@ export default {
 
       this.graphs.forEach((graph) => {
         const timestamp = new Date(graph.timestamp);
-
-        // Very jank timezone fix
-        const hours = timestamp.getHours();
-        const offset = 1;
-
-        timestamp.setHours(hours + offset);
-
         const dataset = datasets.find((dataset) => dataset.uuid === graph.uuid);
 
         const { username, uuid, sips, shots, color } = graph;
