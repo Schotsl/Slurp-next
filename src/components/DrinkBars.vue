@@ -63,10 +63,10 @@ export default {
         let second = 0;
 
         first += player.taken_sips;
-        first += player.taken_shots;
+        first += player.taken_shots * 20;
 
         second += player.remaining_sips;
-        second += player.remaining_shots;
+        second += player.remaining_shots * 20;
 
         taken.push(first);
         labels.push(player.username);
