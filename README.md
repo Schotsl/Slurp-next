@@ -1,4 +1,4 @@
-# slurp-client
+# new
 
 ## Project setup
 ```
