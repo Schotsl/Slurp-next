@@ -1,19 +1,17 @@
 .container {
   display: block;
-  overflow-y: scroll;
-    height: calc((100vh - 155px) / 2);
-  
-    scroll-behavior: smooth;
-  /* Hide scrollbar */
+  height: calc((100vh - 155px) / 2);
   border: 1px solid #ddd;
+
+  overflow-y: scroll;
   border-width: 1px 0;
-  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-
 }
 
 .header {
@@ -21,30 +19,23 @@
 }
 
 .header .cell {
+  top: 0;
   position: sticky;
-  top: 0; /* Don't forget this, required for the stickiness */
-  padding-top: 12px;
-  padding-bottom: 12px;
   text-align: left;
   font-weight: 500;
-  /* border: 1px solid #000; */
+  padding-top: 12px;
+  padding-bottom: 12px;
   background-color: #e5e5e5;
 }
 
-.body {
-
+.row:nth-child(even){
+  background-color: #f2f2f2;
 }
-
-.row:nth-child(even){background-color: #f2f2f2;}
 
 .cell {
-  text-align: left;
   border: 1px solid #ddd;
   padding: 8px;
-}
-
-.cell:first-of-type {
-  width: 48px;
+  text-align: left;
 }
 
 .avatar {

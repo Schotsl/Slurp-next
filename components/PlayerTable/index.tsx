@@ -16,22 +16,26 @@ export default function PlayerTable({ players }: Prop) {
   };
 
   const tableRef = useRef<HTMLDivElement>(null);
-  const [scrollDirection, setScrollDirection] = useState(1); // 1 for down, -1 for up
+  
+  const [scrollDirection, setScrollDirection] = useState(1);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (tableRef.current) {
         if (tableRef.current.scrollTop + tableRef.current.clientHeight >= tableRef.current.scrollHeight) {
-          setScrollDirection(-15); // Reached the bottom, start going up
+          setScrollDirection(-15);
         } else if (tableRef.current.scrollTop === 0) {
-          setScrollDirection(15); // Reached the top, start going down
+          setScrollDirection(15);
         }
         
         tableRef.current.scrollTop += scrollDirection;
       }
-    }, 100); // Change this time to adjust the scrolling speed
+    }, 100);
 
-    return () => clearInterval(intervalId); // This is necessary to avoid memory leaks
+    return () => {
+      // This is necessary to avoid memory leaks
+      clearInterval(intervalId); 
+    }
   }, [scrollDirection]);
 
   return (
