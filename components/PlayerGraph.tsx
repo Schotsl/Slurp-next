@@ -62,11 +62,11 @@ export default function PlayerGraph() {
   const [height, setHeight] = useState(0);
 
   window.addEventListener("resize", () => {
-    setHeight(window.innerHeight - 209.6);
+    setHeight(window.innerHeight - 155);
   });
 
   window.addEventListener("load", () => {
-    setHeight(window.innerHeight - 209.6);
+    setHeight(window.innerHeight - 155);
   });
 
   return (

@@ -1,21 +1,35 @@
 "use client";
 
+import { useState } from "react";
+
 import styles from "./page.module.css";
 
 import PlayerBars from "@/components/PlayerBars";
 import PlayerGraph from "@/components/PlayerGraph";
 import PlayerTable from "@/components/PlayerTable";
 
+// https://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db
+
 export default function Preview() {
-  // WebSocket URL https://slurp-dev.deno.dev/v1/socket/
-  // const ws = new WebSocket('https://slurp-dev.deno.dev/v1/socket/')
+  const [players, setPlayers] = useState([]);
+
+  const socket = new WebSocket("wss://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db");
+
+  socket.addEventListener("open", function (event) {
+    // socket.send("Hello Server!");
+  });
+  
+  socket.addEventListener("message", function (event) {
+    const data = JSON.parse(event.data);
+    setPlayers(data);
+  });
 
   return (
     <div className={styles.overview}>
       <div className={styles.overview__row}>
         <div className={styles.overview__cell}>
           <h2>Players</h2>
-          <PlayerGraph />
+          <PlayerTable players={players} />
         </div>
         <div className={styles.overview__cell}>
           <h2>Shots</h2>
