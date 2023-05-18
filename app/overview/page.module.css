@@ -1,0 +1,19 @@
+.overview {
+  gap: 40px;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.overview__row {
+  gap: 40px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+}
+
+.overview__cell {
+  flex: 1;
+}
