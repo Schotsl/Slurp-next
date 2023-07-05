@@ -31,7 +31,9 @@ export default function Home() {
 
   return (
     <main className={styles.room}>
-      <h1 className={styles.room__title}>Let's find out who's dying tonight</h1>
+      <h1 className={styles.room__title}>
+        <span>Let's find out who's dying tonight</span>
+      </h1>
       <form className={styles.room__form} onSubmit={onSubmit}>
         <input
           className={styles.room__form__input}
