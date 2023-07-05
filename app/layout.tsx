@@ -1,6 +1,18 @@
-import { Inter } from "next/font/google";
+import { Inter, Roboto, Roboto_Slab } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+import styles from "@/app/layout.module.scss";
+
+const roboto = Roboto({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
+
+const robotSlab = Roboto_Slab({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-roboto-slab",
+});
 
 export const metadata = {
   title: "Slurp",
@@ -12,8 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html className={`${styles.layout}`} lang="en">
+      <body
+        className={`${styles.layout__body} ${roboto.className} ${robotSlab.className}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

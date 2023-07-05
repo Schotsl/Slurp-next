@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 
 const serverEndpoint = process.env.NEXT_PUBLIC_SERVER_ENDPOINT;
 const serverVersion = process.env.NEXT_PUBLIC_SERVER_VERSION;
@@ -32,9 +32,18 @@ export default function Home() {
   return (
     <main className={styles.room}>
       <h1 className={styles.room__title}>Let's find out who's dying tonight</h1>
-      <form onSubmit={onSubmit}>
-        <input type="text" name="roomcode" placeholder="What's the roomcode?" />
-        <input type="submit" value="submit" />
+      <form className={styles.room__form} onSubmit={onSubmit}>
+        <input
+          className={styles.room__form__input}
+          type="text"
+          name="roomcode"
+          placeholder="What's the roomcode?"
+        />
+        <input
+          className={styles.room__form__submit}
+          type="submit"
+          value="Let's get started"
+        />
       </form>
     </main>
   );
