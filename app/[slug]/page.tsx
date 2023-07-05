@@ -13,12 +13,14 @@ import PlayerTable from "@/components/PlayerTable";
 export default function Preview() {
   const [players, setPlayers] = useState([]);
 
-  const socket = new WebSocket("wss://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db");
+  const socket = new WebSocket(
+    "wss://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db",
+  );
 
   socket.addEventListener("open", function (event) {
     // socket.send("Hello Server!");
   });
-  
+
   socket.addEventListener("message", function (event) {
     const data = JSON.parse(event.data);
     setPlayers(data);

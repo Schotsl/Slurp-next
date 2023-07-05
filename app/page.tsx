@@ -1,8 +1,8 @@
 "use client";
 
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-import styles from './page.module.css'
+import styles from "./page.module.css";
 
 const serverEndpoint = process.env.NEXT_PUBLIC_SERVER_ENDPOINT;
 const serverVersion = process.env.NEXT_PUBLIC_SERVER_VERSION;
@@ -26,19 +26,16 @@ export default function Home() {
 
       redirect(`/${sessionUuid}`);
     } else {
-
     }
-
-
   }
 
   return (
     <main className={styles.room}>
       <h1 className={styles.room__title}>Let's find out who's dying tonight</h1>
       <form onSubmit={onSubmit}>
-        <input type="text" name="roomcode" placeholder="What's the roomcode?"/>
+        <input type="text" name="roomcode" placeholder="What's the roomcode?" />
         <input type="submit" value="submit" />
       </form>
     </main>
-  )
+  );
 }

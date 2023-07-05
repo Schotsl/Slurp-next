@@ -16,26 +16,29 @@ export default function PlayerTable({ players }: Prop) {
   };
 
   const tableRef = useRef<HTMLDivElement>(null);
-  
+
   const [scrollDirection, setScrollDirection] = useState(1);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (tableRef.current) {
-        if (tableRef.current.scrollTop + tableRef.current.clientHeight >= tableRef.current.scrollHeight) {
+        if (
+          tableRef.current.scrollTop + tableRef.current.clientHeight >=
+          tableRef.current.scrollHeight
+        ) {
           setScrollDirection(-15);
         } else if (tableRef.current.scrollTop === 0) {
           setScrollDirection(15);
         }
-        
+
         tableRef.current.scrollTop += scrollDirection;
       }
     }, 100);
 
     return () => {
       // This is necessary to avoid memory leaks
-      clearInterval(intervalId); 
-    }
+      clearInterval(intervalId);
+    };
   }, [scrollDirection]);
 
   return (
@@ -54,7 +57,12 @@ export default function PlayerTable({ players }: Prop) {
         <tbody className={styles.body}>
           {players.map((player) => (
             <tr key={player.uuid} className={styles.row}>
-              <td className={styles.cell}><img src={minecraftFace(player.username)} className={styles.avatar} /></td>
+              <td className={styles.cell}>
+                <img
+                  src={minecraftFace(player.username)}
+                  className={styles.avatar}
+                />
+              </td>
               <td className={styles.cell}>{player.username}</td>
               <td className={styles.cell}>{player.remaining.sips}</td>
               <td className={styles.cell}>{player.remaining.shots}</td>

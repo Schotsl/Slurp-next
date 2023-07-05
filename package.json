@@ -6,7 +6,9 @@
     "dev": "next dev",
     "lint": "next lint",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write --ignore-path .gitignore .",
+    "format:validate": "prettier --check --ignore-path .gitignore ."
   },
   "dependencies": {
     "chart.js": "2.9.4",
@@ -21,7 +23,8 @@
     "@types/react-dom": "18.2.4",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
-    "typescript": "5.0.4",
-    "sass": "^1.63.6"
+    "prettier": "^3.0.0",
+    "sass": "^1.63.6",
+    "typescript": "5.0.4"
   }
 }

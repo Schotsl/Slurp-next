@@ -28,7 +28,7 @@
   background-color: #e5e5e5;
 }
 
-.row:nth-child(even){
+.row:nth-child(even) {
   background-color: #f2f2f2;
 }
 
