@@ -8,7 +8,7 @@
     font-weight: 600;
     font-family: var(--font-roboto);
 
-    color: rgba(0,0,0,0.85);
+    color: rgba(0, 0, 0, 0.85);
     width: 100%;
     margin: 0 0 0 0;
     padding: 2rem 0;
@@ -20,13 +20,13 @@
     overflow: hidden;
     position: relative;
     white-space: nowrap;
-  
+
     span {
       display: inline-block;
       // padding-left: 100%;
       animation: marquee 10s linear infinite;
     }
-  
+
     @keyframes marquee {
       0% {
         transform: translateX(100%);
@@ -53,15 +53,15 @@
       padding: 1rem;
       transition: 0.3 all ease-in-out;
 
-      border: 2px solid rgba(0,0,0,0.5);
+      border: 2px solid rgba(0, 0, 0, 0.5);
       border-radius: 5px;
 
       font-size: 1.25rem;
-      box-shadow: inset 0px 0px 5px rgba(0,0,0,0.1);
+      box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
       box-sizing: content-box;
 
       &::-webkit-input-placeholder {
-        color: rgba(0,0,0,0.85);
+        color: rgba(0, 0, 0, 0.85);
       }
 
       &:focus,
@@ -77,8 +77,8 @@
     }
 
     &__submit {
-      color: rgba(0,0,0,0.85);
-      border: 2px solid rgba(0,0,0,0.5);
+      color: rgba(0, 0, 0, 0.85);
+      border: 2px solid rgba(0, 0, 0, 0.5);
       padding: 1rem;
       background: rgb(255, 199, 0);
 
