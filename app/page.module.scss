@@ -23,7 +23,7 @@
   
     span {
       display: inline-block;
-      padding-left: 100%;
+      // padding-left: 100%;
       animation: marquee 10s linear infinite;
     }
   
@@ -51,12 +51,14 @@
 
     &__input {
       padding: 1rem;
+      transition: 0.3 all ease-in-out;
 
-      border: 2px solid rgba(0,0,0,0.85);
+      border: 2px solid rgba(0,0,0,0.5);
       border-radius: 5px;
 
       font-size: 1.25rem;
       box-shadow: inset 0px 0px 5px rgba(0,0,0,0.1);
+      box-sizing: content-box;
 
       &::-webkit-input-placeholder {
         color: rgba(0,0,0,0.85);
@@ -67,19 +69,26 @@
         outline: none;
         outline: solid 2px rgba(0, 0, 0, 0.25);
       }
+
+      &:hover {
+        border-color: #000;
+        background: #fefdfd;
+      }
     }
 
     &__submit {
       color: rgba(0,0,0,0.85);
-      border: 2px solid rgba(0,0,0,0.85);
+      border: 2px solid rgba(0,0,0,0.5);
       padding: 1rem;
       background: rgb(255, 199, 0);
 
       font-size: 1.25rem;
+      transition: 0.3 all ease-in-out;
       border-radius: 5px;
 
       &:hover {
         background: rgb(199, 185, 255);
+        outline-color: #000;
       }
     }
   }
