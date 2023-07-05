@@ -33,11 +33,10 @@ export default function Home() {
   }
 
   return (
-    <main className={styles.main}>
-      <h1>Let's find out who's dying tonight</h1>
+    <main className={styles.room}>
+      <h1 className={styles.room__title}>Let's find out who's dying tonight</h1>
       <form onSubmit={onSubmit}>
-        <label htmlFor="roomcode">Roomcode</label>
-        <input type="text" id="roomcode" name="roomcode" />
+        <input type="text" name="roomcode" placeholder="What's the roomcode?"/>
         <input type="submit" value="submit" />
       </form>
     </main>

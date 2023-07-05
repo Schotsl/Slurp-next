@@ -20,5 +20,8 @@
     "react-dom": "18.2.0",
     "recharts": "^2.7.2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "sass": "^1.63.6"
   }
 }
