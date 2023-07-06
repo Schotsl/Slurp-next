@@ -15,6 +15,7 @@ const serverMethod = process.env.NEXT_PUBLIC_SERVER_METHOD;
 const serverUrl = `${serverMethod}://${serverEndpoint}/${serverVersion}`;
 
 export default function Home() {
+  const [error, setError] = useState("");
   const [loading, useLoading] = useState(false);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -22,17 +23,19 @@ export default function Home() {
 
     useLoading(true);
 
-    // const sessionShort = event.currentTarget.roomcode.value;
-    // const sessionUrl = `${serverUrl}/session/entity/shortcode/${sessionShort}`;
-    // const sessionFetch = await fetch(sessionUrl);
+    const sessionShort = event.currentTarget.roomcode.value;
+    const sessionUrl = `${serverUrl}/session/entity/shortcode/${sessionShort}`;
+    const sessionFetch = await fetch(sessionUrl);
 
-    // if (sessionFetch.ok) {
-    //   const sessionJson = await sessionFetch.json();
-    //   const sessionUuid = sessionJson.uuid;
+    if (sessionFetch.ok) {
+      const sessionJson = await sessionFetch.json();
+      const sessionUuid = sessionJson.uuid;
 
-    //   redirect(`/${sessionUuid}`);
-    // } else {
-    // }
+      redirect(`/${sessionUuid}`);
+    } else {
+      setError("It appears that this room doesn't exist");
+      useLoading(false);
+    }
   }
 
   return (
@@ -46,7 +49,7 @@ export default function Home() {
         <InputText
           name="roomcode"
           label="Room code"
-          error="It appears that this room doesn't exist"
+          error={error}
           disabled={loading}
           placeholder="Enter your room code"
         />
