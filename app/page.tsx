@@ -16,7 +16,7 @@ const serverUrl = `${serverMethod}://${serverEndpoint}/${serverVersion}`;
 
 export default function Home() {
   const [error, setError] = useState("");
-  const [loading, useLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,7 +30,7 @@ export default function Home() {
       return;
     }
 
-    useLoading(true);
+    setLoading(true);
 
     const sessionUrl = `${serverUrl}/session/entity/shortcode/${sessionShort}`;
     const sessionFetch = await fetch(sessionUrl);
@@ -41,8 +41,8 @@ export default function Home() {
 
       redirect(`/${sessionUuid}`);
     } else {
-      setError("It appears that this room doesn't exist");
-      useLoading(false);
+      setError("It appears that this room doesn&apos;t exist");
+      setLoading(false);
     }
   }
 
