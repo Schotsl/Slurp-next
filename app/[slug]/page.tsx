@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import styles from "./page.module.scss";
 
-import PlayerBars from "@/components/PlayerBars";
+import PlayerBars from "@/components/Player/PlayerBars";
 import PlayerGraph from "@/components/PlayerGraph";
 import PlayerTable from "@/components/PlayerTable";
 

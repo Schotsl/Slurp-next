@@ -1,0 +1,20 @@
+.submit {
+  color: rgba(0, 0, 0, 0.85);
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  background: rgb(255, 199, 0);
+
+  font-size: 1.25rem;
+  transition: 0.3 all ease-in-out;
+  border-radius: 5px;
+
+  &:hover {
+    background: rgb(199, 185, 255);
+    outline-color: #000;
+  }
+
+  &:disabled {
+    color: #000;
+    background: #fefdfd;
+  }
+}

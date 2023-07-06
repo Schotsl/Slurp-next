@@ -2,6 +2,10 @@
 
 import { redirect } from "next/navigation";
 
+import Loader from "@/components/Loader";
+import InputSubmit from "@/components/Input/Submit";
+import InputText from "@/components/Input/Text";
+
 import styles from "./page.module.scss";
 
 const serverEndpoint = process.env.NEXT_PUBLIC_SERVER_ENDPOINT;
@@ -35,21 +39,9 @@ export default function Home() {
         <span>Let's find out who's dying tonight</span>
       </h1>
       <form className={styles.room__form} onSubmit={onSubmit}>
-        <div className={styles.room__form__overlay}>
-          <span className={styles.room__form__overlay__loader}></span>
-        </div>
-
-        <input
-          className={styles.room__form__input}
-          type="text"
-          name="roomcode"
-          placeholder="What's the roomcode?"
-        />
-        <input
-          className={styles.room__form__submit}
-          type="submit"
-          value="Let's get started"
-        />
+        <Loader />
+        <InputText />
+        <InputSubmit />
       </form>
     </main>
   );
