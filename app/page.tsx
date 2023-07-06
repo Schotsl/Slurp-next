@@ -21,9 +21,17 @@ export default function Home() {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const sessionShort = event.currentTarget.roomcode.value;
+    const sessionRegexp = /^[a-z]+-[a-z]+-\d{3}$/i;
+
+    // We'll make sure that the room code is following valid formatting
+    if (!sessionRegexp.test(sessionShort)) {
+      setError("It appears that this room is invalid");
+      return;
+    }
+
     useLoading(true);
 
-    const sessionShort = event.currentTarget.roomcode.value;
     const sessionUrl = `${serverUrl}/session/entity/shortcode/${sessionShort}`;
     const sessionFetch = await fetch(sessionUrl);
 
