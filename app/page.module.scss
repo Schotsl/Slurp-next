@@ -3,38 +3,6 @@
   display: flex;
   flex-direction: column;
 
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: var(--slurp-font-italic);
-
-    width: 100%;
-    margin: 0 0 0 0;
-    padding: 2rem 0;
-    background: var(--slurp-white);
-
-    text-align: center;
-    text-transform: uppercase;
-
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-
-    span {
-      display: inline-block;
-      animation: marquee 10s linear infinite;
-    }
-
-    @keyframes marquee {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-  }
-
   &__form {
     gap: 1.5rem;
     flex: 1;

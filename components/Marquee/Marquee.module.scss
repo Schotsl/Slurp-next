@@ -1,0 +1,40 @@
+.marquee {
+  gap: 50vw;
+  width: 100vw;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+
+  &__list {
+    gap: 50vw;
+    margin: 0;
+    display: flex;
+    animation: scroll 50s linear infinite;
+    
+    min-width: 100%;
+    list-style: none;
+    flex-shrink: 0;
+    justify-content: space-around;
+
+    &__item {
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-family: var(--slurp-font-italic);
+
+      margin: 0 0 0 0;
+      padding: 2rem 0;
+      background: var(--slurp-white);
+
+      text-transform: uppercase;
+    }
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 50vw));
+  }
+}

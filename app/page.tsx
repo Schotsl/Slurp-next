@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { redirect } from "next/navigation";
 
+import Marquee from "@/components/Marquee";
 import Loader from "@/components/Loader";
 import InputSubmit from "@/components/Input/Submit";
 import InputText from "@/components/Input/Text";
@@ -54,9 +55,10 @@ export default function Home() {
 
   return (
     <main className={styles.room}>
-      <h1 className={styles.room__title}>
+      {/* <h1 className={styles.room__title}>
         <span>Let's find out who's dying tonight</span>
-      </h1>
+      </h1> */}
+      <Marquee />
       <form className={styles.room__form} onSubmit={onSubmit}>
         {loading && <Loader />}
 
