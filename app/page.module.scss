@@ -23,7 +23,6 @@
 
     span {
       display: inline-block;
-      // padding-left: 100%;
       animation: marquee 10s linear infinite;
     }
 
@@ -43,6 +42,7 @@
     width: 100%;
     display: flex;
     padding: 0 35vw;
+    position: relative;
     background: #f5f5f5;
 
     box-sizing: border-box;
@@ -89,6 +89,58 @@
       &:hover {
         background: rgb(199, 185, 255);
         outline-color: #000;
+      }
+
+      &:disabled {
+        color: #000;
+        background: #fefdfd;
+      }
+    }
+
+    &__overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &__loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid rgb(255, 199, 0);
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        animation: pulse 1s linear infinite;
+      }
+
+      &__loader:after {
+        content: '';
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        border: 5px solid rgb(255, 199, 0);;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: scale 1s linear infinite;
+      }
+      
+      @keyframes scale {
+        0% { transform: translate(-50%, -50%) scale(0) }
+        60% , 100% { transform: translate(-50%, -50%)  scale(1)}
+      }
+      @keyframes pulse {
+        0% , 60% , 100%{ transform:  scale(1) }
+        80% { transform:  scale(1.2)}
       }
     }
   }

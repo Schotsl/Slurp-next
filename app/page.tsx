@@ -35,6 +35,10 @@ export default function Home() {
         <span>Let's find out who's dying tonight</span>
       </h1>
       <form className={styles.room__form} onSubmit={onSubmit}>
+        <div className={styles.room__form__overlay}>
+          <span className={styles.room__form__overlay__loader}></span>
+        </div>
+
         <input
           className={styles.room__form__input}
           type="text"
