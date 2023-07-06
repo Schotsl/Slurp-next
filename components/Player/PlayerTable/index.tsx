@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -13,6 +14,15 @@ interface Prop {
 export default function PlayerTable({ players }: Prop) {
   const minecraftFace = (username: string) => {
     return `https://mc-heads.net/avatar/${username}/64`;
+  };
+
+  // Check if name ends with s and then place ' in front of it and add string, an example is "Sjors' profile picture" or "Martin's profile picture"
+  const minecraftAlt = (username: string) => {
+    if (username.endsWith("s")) {
+      return `${username}' profile picture`;
+    } else {
+      return `${username}'s profile picture`;
+    }
   };
 
   const tableRef = useRef<HTMLDivElement>(null);
@@ -58,8 +68,11 @@ export default function PlayerTable({ players }: Prop) {
           {players.map((player) => (
             <tr key={player.uuid} className={styles.row}>
               <td className={styles.cell}>
-                <img
+                <Image
                   src={minecraftFace(player.username)}
+                  alt={minecraftAlt(player.username)}
+                  width={28}
+                  height={28}
                   className={styles.avatar}
                 />
               </td>
