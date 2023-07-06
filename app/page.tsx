@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { redirect } from "next/navigation";
 
 import Loader from "@/components/Loader";
@@ -14,23 +15,24 @@ const serverMethod = process.env.NEXT_PUBLIC_SERVER_METHOD;
 const serverUrl = `${serverMethod}://${serverEndpoint}/${serverVersion}`;
 
 export default function Home() {
-  // WebSocket URL https://slurp-dev.deno.dev/v1/socket/
-  // const ws = new WebSocket('https://slurp-dev.deno.dev/v1/socket/')
+  const [loading, useLoading] = useState(false);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const sessionShort = event.currentTarget.roomcode.value;
-    const sessionUrl = `${serverUrl}/session/entity/shortcode/${sessionShort}`;
-    const sessionFetch = await fetch(sessionUrl);
+    useLoading(true);
 
-    if (sessionFetch.ok) {
-      const sessionJson = await sessionFetch.json();
-      const sessionUuid = sessionJson.uuid;
+    // const sessionShort = event.currentTarget.roomcode.value;
+    // const sessionUrl = `${serverUrl}/session/entity/shortcode/${sessionShort}`;
+    // const sessionFetch = await fetch(sessionUrl);
 
-      redirect(`/${sessionUuid}`);
-    } else {
-    }
+    // if (sessionFetch.ok) {
+    //   const sessionJson = await sessionFetch.json();
+    //   const sessionUuid = sessionJson.uuid;
+
+    //   redirect(`/${sessionUuid}`);
+    // } else {
+    // }
   }
 
   return (
@@ -39,9 +41,15 @@ export default function Home() {
         <span>Let's find out who's dying tonight</span>
       </h1>
       <form className={styles.room__form} onSubmit={onSubmit}>
-        <Loader />
-        <InputText />
-        <InputSubmit />
+        {loading && <Loader />}
+
+        <InputText
+          name="roomcode"
+          disabled={loading}
+          placeholder="Enter your room code"
+        />
+
+        <InputSubmit value="Let's go!" disabled={loading} />
       </form>
     </main>
   );

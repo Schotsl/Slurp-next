@@ -2,8 +2,18 @@
 
 import styles from "./InputSubmit.module.scss";
 
-export default function InputSubmit() {
+type InputSubmitProps = {
+  value: string;
+  disabled?: boolean;
+};
+
+export default function InputSubmit({ value, disabled }: InputSubmitProps) {
   return (
-    <input className={styles.submit} type="submit" value="Let's get started" />
+    <input
+      type="submit"
+      value={value}
+      disabled={disabled}
+      className={styles.submit}
+    />
   );
 }

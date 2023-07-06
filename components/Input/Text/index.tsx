@@ -2,13 +2,30 @@
 
 import styles from "./InputText.module.scss";
 
-export default function InputText() {
+type InputTextProps = {
+  name: string;
+  error?: string;
+  disabled?: boolean;
+  placeholder?: string;
+};
+
+export default function InputText({
+  name,
+  error,
+  disabled,
+  placeholder,
+}: InputTextProps) {
+  const textClasses = error
+    ? `${styles["text"]} ${styles["text--error"]}`
+    : `${styles["text"]}`;
+
   return (
     <input
-      className={styles.text}
       type="text"
-      name="roomcode"
-      placeholder="What's the roomcode?"
+      name={name}
+      disabled={disabled}
+      className={textClasses}
+      placeholder={placeholder}
     />
   );
 }

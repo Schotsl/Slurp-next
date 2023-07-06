@@ -22,5 +22,12 @@
   &:hover {
     border-color: #000;
     background: #fefdfd;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+  }
+
+  &--error {
+    border-color: #ff0000;
+    background: #fefdfd;
+    box-shadow: inset 0px 0px 5px rgba(255, 0, 0, 0.25);
   }
 }

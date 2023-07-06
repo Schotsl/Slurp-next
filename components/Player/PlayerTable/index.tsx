@@ -2,7 +2,7 @@ import React from "react";
 
 import { useEffect, useRef, useState } from "react";
 
-import styles from "./PlayerTable.module.css";
+import styles from "./PlayerTable.module.scss";
 
 import { Player } from "@/types";
 
