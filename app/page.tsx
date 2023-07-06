@@ -21,12 +21,18 @@ export default function Home() {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    // If nothing has been provided
+    if (!event.currentTarget.roomcode.value) {
+      setError("Please enter a room code");
+      return;
+    }
+
     const sessionShort = event.currentTarget.roomcode.value;
     const sessionRegexp = /^[a-z]+-[a-z]+-\d{3}$/i;
 
     // We'll make sure that the room code is following valid formatting
     if (!sessionRegexp.test(sessionShort)) {
-      setError("It appears that this room is invalid");
+      setError("It appears that this room code is invalid");
       return;
     }
 
