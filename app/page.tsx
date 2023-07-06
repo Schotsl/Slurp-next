@@ -45,6 +45,8 @@ export default function Home() {
 
         <InputText
           name="roomcode"
+          label="Room code"
+          error="It appears that this room doesn't exist"
           disabled={loading}
           placeholder="Enter your room code"
         />

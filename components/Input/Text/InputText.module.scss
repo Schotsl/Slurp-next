@@ -1,33 +1,58 @@
 .text {
-  padding: 1rem;
-  transition: 0.3 all ease-in-out;
+  display: flex;
+  flex-direction: column;
 
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-
-  font-size: 1.25rem;
-  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
-  box-sizing: content-box;
-
-  &::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.85);
+  &__label {
+    // Let's hide the label for non-screen readers
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    border: 0;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
   }
 
-  &:focus,
-  &:active {
-    outline: none;
-    outline: solid 2px rgba(0, 0, 0, 0.25);
+  &__input {
+    padding: 1rem;
+    transition: 0.3 all ease-in-out;
+
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+
+    font-size: 1.25rem;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: content-box;
+
+    &::-webkit-input-placeholder {
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      outline: solid 2px rgba(0, 0, 0, 0.25);
+    }
+
+    &:hover {
+      border-color: #000;
+      background: #fefdfd;
+    }
+
+    &--error {
+      border-color: #ff0000;
+      // color: #ff0000;
+      background: #fefdfd;
+    }
   }
 
-  &:hover {
-    border-color: #000;
-    background: #fefdfd;
-    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
-  }
+  &__error {
+    color: #ff0000;
+    margin: 0.5rem 0 0 0;
 
-  &--error {
-    border-color: #ff0000;
-    background: #fefdfd;
-    box-shadow: inset 0px 0px 5px rgba(255, 0, 0, 0.25);
+    font-size: 1rem;
+    font-family: var(--font-roboto);
   }
 }
