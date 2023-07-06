@@ -1,11 +1,11 @@
 .submit {
-  border: 2px solid var(--slurp-border);
+  border: 0.125rem solid var(--slurp-border);
   padding: 1rem;
   background: var(--slurp-yellow);
 
   font-size: 1.25rem;
   transition: 0.3 all ease-in-out;
-  border-radius: 5px;
+  border-radius: 0.375rem;
 
   &:hover {
     background: var(--slurp-purple);
