@@ -4,10 +4,11 @@
   height: 100%;
 
   &__body {
+    color: var(--slurp-color);
     margin: 0px;
     height: 100%;
     display: flex;
 
-    font-family: "Roboto";
+    font-family: var(--slurp-font);
   }
 }

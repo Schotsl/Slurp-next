@@ -19,40 +19,39 @@
     padding: 1rem;
     transition: 0.3 all ease-in-out;
 
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--slurp-border);
     border-radius: 5px;
 
     font-size: 1.25rem;
-    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--slurp-input-inner);
     box-sizing: content-box;
 
     &::-webkit-input-placeholder {
-      color: rgba(0, 0, 0, 0.85);
+      color: var(--slurp-color);
     }
 
     &:focus,
     &:active {
       outline: none;
-      outline: solid 2px rgba(0, 0, 0, 0.25);
+      outline: var(--slurp-input-focus);
     }
 
     &:hover {
-      border-color: #000;
-      background: #fefdfd;
+      border-color: var(--slurp-black);
+      background: var(--slurp-disabled);
     }
 
     &--error {
-      border-color: #ff0000;
-      background: #fefdfd;
+      border-color: var(--slurp-red);
 
       &:hover {
-        border-color: #ff0000;
+        border-color: var(--slurp-red);
       }
     }
   }
 
   &__error {
-    color: #ff0000;
+    color: var(--slurp-red);
     margin: 0.5rem 0 0 0;
 
     font-size: 1rem;

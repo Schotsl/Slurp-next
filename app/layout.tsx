@@ -1,4 +1,4 @@
-import { Roboto, Roboto_Slab } from "next/font/google";
+import "@/styles/variables.scss";
 
 import styles from "@/app/layout.module.scss";
 

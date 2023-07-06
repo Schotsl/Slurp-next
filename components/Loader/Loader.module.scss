@@ -4,7 +4,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: var(--slurp-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
   &__spinner {
     width: 48px;
     height: 48px;
-    border: 5px solid rgba(0, 0, 0, 0.85);
+    border: 5px solid var(--slurp-color);
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

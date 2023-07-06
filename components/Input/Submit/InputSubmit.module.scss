@@ -1,20 +1,19 @@
 .submit {
-  color: rgba(0, 0, 0, 0.85);
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--slurp-border);
   padding: 1rem;
-  background: rgb(255, 199, 0);
+  background: var(--slurp-yellow);
 
   font-size: 1.25rem;
   transition: 0.3 all ease-in-out;
   border-radius: 5px;
 
   &:hover {
-    background: rgb(199, 185, 255);
-    outline-color: #000;
+    background: var(--slurp-purple);
+    outline-color: var(--slurp-border-hover);
   }
 
   &:disabled {
-    color: #000;
-    background: #fefdfd;
+    color: var(--slurp-black);
+    background: var(--slurp-disabled);
   }
 }
