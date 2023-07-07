@@ -13,7 +13,7 @@ interface Prop {
 
 export default function PlayerTable({ players }: Prop) {
   const minecraftFace = (username: string) => {
-    return `https://mc-heads.net/avatar/${username}/64`;
+    return `https://mc-heads.net/avatar/${username}/28`;
   };
 
   // Check if name ends with s and then place ' in front of it and add string, an example is "Sjors' profile picture" or "Martin's profile picture"

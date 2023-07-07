@@ -10,16 +10,16 @@ import PlayerTable from "@/components/Player/PlayerTable";
 
 // https://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db
 
-export default function Preview() {
+type PreviewProps = {
+  params: { slug: string };
+};
+
+export default function Preview({ params }: PreviewProps) {
   const [players, setPlayers] = useState([]);
 
   const socket = new WebSocket(
-    "wss://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db",
+    `wss://slurp-dev.deno.dev/v1/socket/session/${params.slug}`
   );
-
-  socket.addEventListener("open", function (event) {
-    // socket.send("Hello Server!");
-  });
 
   socket.addEventListener("message", function (event) {
     const data = JSON.parse(event.data);
