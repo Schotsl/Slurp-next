@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { redirect } from "next/navigation";
 
-import Marquee from "@/components/Marquee";
 import Loader from "@/components/Loader";
-import InputSubmit from "@/components/Input/Submit";
+import Marquee from "@/components/Marquee";
+
 import InputText from "@/components/Input/Text";
+import InputSubmit from "@/components/Input/Submit";
 
 import styles from "./page.module.scss";
 
@@ -46,18 +46,15 @@ export default function Home() {
       const sessionJson = await sessionFetch.json();
       const sessionUuid = sessionJson.uuid;
 
-      redirect(`/${sessionUuid}`);
+      window.location.replace(`/${sessionUuid}`);
     } else {
-      setError("It appears that this room doesn&apos;t exist");
+      setError("It appears that this room does not exist");
       setLoading(false);
     }
   }
 
   return (
     <main className={styles.room}>
-      {/* <h1 className={styles.room__title}>
-        <span>Let's find out who's dying tonight</span>
-      </h1> */}
       <Marquee />
       <form className={styles.room__form} onSubmit={onSubmit}>
         {loading && <Loader />}
