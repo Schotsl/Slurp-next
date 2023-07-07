@@ -25,7 +25,7 @@ export default function Preview({ params }: PreviewProps) {
   const [bars, setBars] = useState([]);
 
   const sessionSocket = new WebSocket(
-    `${serverUrl}/socket/session/${params.slug}`
+    `${serverUrl}/socket/session/${params.slug}`,
   );
 
   const graphSocket = new WebSocket(`${serverUrl}/socket/graph/${params.slug}`);
