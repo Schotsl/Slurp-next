@@ -10,20 +10,41 @@ import PlayerTable from "@/components/Player/PlayerTable";
 
 // https://slurp-dev.deno.dev/v1/socket/session/07f60c96-e367-4c84-bd99-6ee3d1f717db
 
+const serverEndpoint = process.env.NEXT_PUBLIC_SERVER_ENDPOINT;
+const serverVersion = process.env.NEXT_PUBLIC_SERVER_VERSION;
+const serverSocket = process.env.NEXT_PUBLIC_SERVER_SOCKET;
+const serverUrl = `${serverSocket}://${serverEndpoint}/${serverVersion}`;
+
 type PreviewProps = {
   params: { slug: string };
 };
 
 export default function Preview({ params }: PreviewProps) {
   const [players, setPlayers] = useState([]);
+  const [graph, setGraph] = useState([]);
+  const [bars, setBars] = useState([]);
 
-  const socket = new WebSocket(
-    `wss://slurp-dev.deno.dev/v1/socket/session/${params.slug}`
+  const sessionSocket = new WebSocket(
+    `${serverUrl}/socket/session/${params.slug}`
   );
 
-  socket.addEventListener("message", function (event) {
+  const graphSocket = new WebSocket(`${serverUrl}/socket/graph/${params.slug}`);
+
+  const barsSocket = new WebSocket(`${serverUrl}/socket/bars/${params.slug}`);
+
+  sessionSocket.addEventListener("message", function (event) {
     const data = JSON.parse(event.data);
     setPlayers(data);
+  });
+
+  graphSocket.addEventListener("message", function (event) {
+    const data = JSON.parse(event.data);
+    console.log(data);
+  });
+
+  barsSocket.addEventListener("message", function (event) {
+    const data = JSON.parse(event.data);
+    console.log(data);
   });
 
   return (
