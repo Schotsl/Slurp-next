@@ -41,34 +41,22 @@ export default function Preview({ params }: PreviewProps) {
       setBars(data);
     });
 
+    const graphSocket = new WebSocket(
+      `${serverUrl}/socket/graph/${params.slug}`
+    );
+
+    graphSocket.addEventListener("message", function (event) {
+      const data = JSON.parse(event.data);
+      console.log(data);
+      setGraph(data);
+    });
+
     return () => {
       sessionSocket.close();
+      graphSocket.close();
       barsSocket.close();
     };
   }, []);
-
-  // const sessionSocket = new WebSocket(
-  //   `${serverUrl}/socket/session/${params.slug}`
-  // );
-
-  // // const graphSocket = new WebSocket(`${serverUrl}/socket/graph/${params.slug}`);
-
-  // const barsSocket = new WebSocket(`${serverUrl}/socket/bars/${params.slug}`);
-
-  // sessionSocket.addEventListener("message", function (event) {
-  //   const data = JSON.parse(event.data);
-  //   setPlayers(data);
-  // });
-
-  // // graphSocket.addEventListener("message", function (event) {
-  // //   const data = JSON.parse(event.data);
-  // //   console.log(data);
-  // // });
-
-  // barsSocket.addEventListener("message", function (event) {
-  //   const data = JSON.parse(event.data);
-  //   console.log(data);
-  // });
 
   return (
     <div className={styles.overview}>
@@ -79,18 +67,18 @@ export default function Preview({ params }: PreviewProps) {
         </div>
         <div className={styles.overview__cell}>
           <h2>Shots</h2>
-          <PlayerGraph />
+          <PlayerGraph graphs={graph} />
         </div>
       </div>
 
       <div className={styles.overview__row}>
         <div className={styles.overview__cell}>
           <h2>Total</h2>
-          <PlayerBars bars={bars} players={players} />
+          <PlayerBars bars={bars} />
         </div>
         <div className={styles.overview__cell}>
           <h2>Sips</h2>
-          <PlayerGraph />
+          <PlayerGraph graphs={graph} />
         </div>
       </div>
     </div>

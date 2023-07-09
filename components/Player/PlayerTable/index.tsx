@@ -79,8 +79,8 @@ export default function PlayerTable({ players }: Prop) {
               <td className={styles.cell}>{player.username}</td>
               <td className={styles.cell}>{player.remaining.sips}</td>
               <td className={styles.cell}>{player.remaining.shots}</td>
-              <td className={styles.cell}>{player.taken.sips}</td>
-              <td className={styles.cell}>{player.taken.shots}</td>
+              <td className={styles.cell}>{Math.abs(player.taken.sips)}</td>
+              <td className={styles.cell}>{Math.abs(player.taken.shots)}</td>
             </tr>
           ))}
         </tbody>

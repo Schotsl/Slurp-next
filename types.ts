@@ -20,3 +20,11 @@ export interface SlurpBar {
   sips_consumed: number;
   sips_to_consume: number;
 }
+
+export interface SlurpGraph {
+  player_username: string;
+  player_uuid: string;
+  timestamp_utc: string;
+  units_consumed: string;
+  units_consume: string;
+}

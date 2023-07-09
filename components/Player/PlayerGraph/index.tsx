@@ -1,89 +1,141 @@
-"use client";
-
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
-  ResponsiveContainer,
-  CartesianGrid,
   Tooltip,
   Legend,
+  CartesianGrid,
+  ResponsiveContainer,
 } from "recharts";
+import moment from "moment";
+import { SlurpGraph } from "@/types";
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+interface ChartData {
+  player_uuid: string;
+  data: {
+    time: string;
+    units_consumed: number;
+  }[];
+}
 
-export default function PlayerGraph() {
-  const [height, setHeight] = useState(0);
+type PlayerGraphProps = {
+  graphs: SlurpGraph[];
+};
 
-  window.addEventListener("resize", () => {
-    setHeight(window.innerHeight - 155);
+function createChartData(graphs: SlurpGraph[]): ChartData[] {
+  let players = Array.from(new Set(graphs.map((item) => item.player_uuid)));
+
+  let chartData: ChartData[] = [];
+
+  players.forEach((player) => {
+    let playerData: { time: number; units_consumed: number }[] = [];
+
+    let timestamp = moment().subtract(24, "hours").utc();
+    let endTimestamp = moment().utc();
+
+    while (timestamp <= endTimestamp) {
+      playerData.push({
+        time: timestamp.valueOf(),
+        units_consumed: 0,
+      });
+
+      timestamp.add(15, "minutes");
+    }
+
+    let sortedPlayerGraphs = graphs
+      .filter((graph) => graph.player_uuid === player)
+      .sort(
+        (a, b) =>
+          moment(a.timestamp_utc).valueOf() - moment(b.timestamp_utc).valueOf()
+      );
+
+    sortedPlayerGraphs.forEach((playerGraph) => {
+      let graphTimestamp = moment.utc(playerGraph.timestamp_utc).valueOf();
+
+      let slot = playerData.find((item) => item.time === graphTimestamp);
+
+      if (slot) {
+        slot.units_consumed += parseInt(playerGraph.units_consumed);
+      } else {
+        let previousSlot = playerData
+          .slice(0)
+          .reverse()
+          .find((item) => item.time < graphTimestamp);
+
+        if (previousSlot) {
+          previousSlot.units_consumed += parseInt(playerGraph.units_consumed);
+        }
+      }
+    });
+
+    for (let i = 1; i < playerData.length; i++) {
+      if (playerData[i].units_consumed === 0) {
+        playerData[i].units_consumed = playerData[i - 1].units_consumed;
+      }
+    }
+
+    chartData.push({
+      player_uuid: player,
+      data: playerData,
+    });
   });
 
-  window.addEventListener("load", () => {
-    setHeight(window.innerHeight - 155);
-  });
+  return chartData;
+}
+
+export default function PlayerGraph({ graphs }: PlayerGraphProps) {
+  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [playerNames, setPlayerNames] = useState<{ [key: string]: string }>({});
+  const [height, setHeight] = useState(window.innerHeight - 155);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setHeight(window.innerHeight - 155);
+    });
+
+    window.addEventListener("load", () => {
+      setHeight(window.innerHeight - 155);
+    });
+
+    // Create a mapping of player_uuid to player_username
+    const playerNames: { [key: string]: string } = {};
+    graphs.forEach((graph) => {
+      playerNames[graph.player_uuid] = graph.player_username;
+    });
+    setPlayerNames(playerNames);
+
+    setChartData(createChartData(graphs));
+  }, [graphs]);
 
   return (
     <ResponsiveContainer width="100%" height={height / 2}>
-      <LineChart data={data}>
+      <LineChart>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis
+          dataKey="time"
+          scale="time"
+          type="number"
+          domain={["auto", "auto"]}
+          tickFormatter={(unixTime) =>
+            moment(unixTime).format("YYYY-MM-DD HH:mm")
+          }
+        />
+
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type="monotone"
-          dataKey="pv"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+        {chartData.map((playerData, index) => (
+          <Line
+            key={playerData.player_uuid}
+            type="monotone"
+            data={playerData.data}
+            dataKey="units_consumed"
+            stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+            name={playerNames[playerData.player_uuid]} // add name here
+          />
+        ))}
       </LineChart>
     </ResponsiveContainer>
   );
