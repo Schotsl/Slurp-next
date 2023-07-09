@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./page.module.scss";
 
@@ -24,28 +24,51 @@ export default function Preview({ params }: PreviewProps) {
   const [graph, setGraph] = useState([]);
   const [bars, setBars] = useState([]);
 
-  const sessionSocket = new WebSocket(
-    `${serverUrl}/socket/session/${params.slug}`,
-  );
+  useEffect(() => {
+    const sessionSocket = new WebSocket(
+      `${serverUrl}/socket/session/${params.slug}`
+    );
 
-  const graphSocket = new WebSocket(`${serverUrl}/socket/graph/${params.slug}`);
+    sessionSocket.addEventListener("message", function (event) {
+      const data = JSON.parse(event.data);
+      setPlayers(data);
+    });
 
-  const barsSocket = new WebSocket(`${serverUrl}/socket/bars/${params.slug}`);
+    const barsSocket = new WebSocket(`${serverUrl}/socket/bars/${params.slug}`);
 
-  sessionSocket.addEventListener("message", function (event) {
-    const data = JSON.parse(event.data);
-    setPlayers(data);
-  });
+    barsSocket.addEventListener("message", function (event) {
+      const data = JSON.parse(event.data);
+      setBars(data);
+    });
 
-  graphSocket.addEventListener("message", function (event) {
-    const data = JSON.parse(event.data);
-    console.log(data);
-  });
+    return () => {
+      sessionSocket.close();
+      barsSocket.close();
+    };
+  }, []);
 
-  barsSocket.addEventListener("message", function (event) {
-    const data = JSON.parse(event.data);
-    console.log(data);
-  });
+  // const sessionSocket = new WebSocket(
+  //   `${serverUrl}/socket/session/${params.slug}`
+  // );
+
+  // // const graphSocket = new WebSocket(`${serverUrl}/socket/graph/${params.slug}`);
+
+  // const barsSocket = new WebSocket(`${serverUrl}/socket/bars/${params.slug}`);
+
+  // sessionSocket.addEventListener("message", function (event) {
+  //   const data = JSON.parse(event.data);
+  //   setPlayers(data);
+  // });
+
+  // // graphSocket.addEventListener("message", function (event) {
+  // //   const data = JSON.parse(event.data);
+  // //   console.log(data);
+  // // });
+
+  // barsSocket.addEventListener("message", function (event) {
+  //   const data = JSON.parse(event.data);
+  //   console.log(data);
+  // });
 
   return (
     <div className={styles.overview}>
@@ -63,7 +86,7 @@ export default function Preview({ params }: PreviewProps) {
       <div className={styles.overview__row}>
         <div className={styles.overview__cell}>
           <h2>Total</h2>
-          <PlayerBars />
+          <PlayerBars bars={bars} players={players} />
         </div>
         <div className={styles.overview__cell}>
           <h2>Sips</h2>

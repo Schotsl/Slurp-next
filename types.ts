@@ -1,15 +1,22 @@
-export interface Consumable {
+export interface SlurpConsumable {
   sips: number;
   shots: number;
 }
 
-export interface Player {
+export interface SlurpPlayer {
   uuid: string;
-  taken: Consumable;
+  taken: SlurpConsumable;
   session: string;
   created: string;
   updated: string;
   username: string;
-  giveable: Consumable;
-  remaining: Consumable;
+  giveable: SlurpConsumable;
+  remaining: SlurpConsumable;
+}
+
+export interface SlurpBar {
+  player_username: string;
+  player_uuid: string;
+  sips_consumed: number;
+  sips_to_consume: number;
 }

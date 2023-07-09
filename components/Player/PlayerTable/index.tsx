@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 
 import styles from "./PlayerTable.module.scss";
 
-import { Player } from "@/types";
+import { SlurpPlayer } from "@/types";
 
 interface Prop {
-  players: Player[];
+  players: SlurpPlayer[];
 }
 
 export default function PlayerTable({ players }: Prop) {
