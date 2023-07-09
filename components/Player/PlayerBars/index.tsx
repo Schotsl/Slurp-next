@@ -1,6 +1,4 @@
-"use client";
-
-import { Player, SlurpBar } from "@/types";
+import { SlurpPlayer, SlurpBar } from "@/types";
 import { useEffect, useState } from "react";
 import React from "react";
 import {
@@ -21,13 +19,22 @@ type PlayerBarsProps = {
 export default function PlayerBars({ bars }: PlayerBarsProps) {
   const [height, setHeight] = useState(0);
 
-  window.addEventListener("resize", () => {
-    setHeight(window.innerHeight - 155);
-  });
+  useEffect(() => {
+    function handleResize() {
+      setHeight(window.innerHeight - 155);
+    }
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("load", handleResize);
 
-  window.addEventListener("load", () => {
-    setHeight(window.innerHeight - 155);
-  });
+    // Call handler right away so state gets updated with initial window height
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("load", handleResize);
+    };
+  }, []); // Empty array ensures that effect is only run on mount and unmount
 
   return (
     <ResponsiveContainer width="100%" height={height / 2}>
@@ -37,7 +44,12 @@ export default function PlayerBars({ bars }: PlayerBarsProps) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="units_consumed" stackId="a" fill="#8884d8" />
+        <Bar
+          dataKey="units_consumed"
+          stackId="a"
+          display="Bruh"
+          fill="#8884d8"
+        />
         <Bar dataKey="units_consume" stackId="a" fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
