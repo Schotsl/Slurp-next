@@ -26,7 +26,7 @@ export default function Preview({ params }: PreviewProps) {
 
   useEffect(() => {
     const sessionSocket = new WebSocket(
-      `${serverUrl}/socket/session/${params.slug}`
+      `${serverUrl}/socket/session/${params.slug}`,
     );
 
     sessionSocket.addEventListener("message", function (event) {
@@ -42,7 +42,7 @@ export default function Preview({ params }: PreviewProps) {
     });
 
     const graphSocket = new WebSocket(
-      `${serverUrl}/socket/graph/${params.slug}`
+      `${serverUrl}/socket/graph/${params.slug}`,
     );
 
     graphSocket.addEventListener("message", function (event) {

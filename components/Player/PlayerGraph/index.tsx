@@ -48,7 +48,7 @@ function createChartData(graphs: SlurpGraph[]): ChartData[] {
       .filter((graph) => graph.player_uuid === player)
       .sort(
         (a, b) =>
-          moment(a.timestamp_utc).valueOf() - moment(b.timestamp_utc).valueOf()
+          moment(a.timestamp_utc).valueOf() - moment(b.timestamp_utc).valueOf(),
       );
 
     sortedPlayerGraphs.forEach((playerGraph) => {
