@@ -6,6 +6,7 @@ import {
   Bar,
   XAxis,
   YAxis,
+  LabelList,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -46,11 +47,20 @@ export default function PlayerBars({ bars }: PlayerBarsProps) {
         <Legend />
         <Bar
           dataKey="units_consumed"
+          name="Units Consumed"
           stackId="a"
-          display="Bruh"
           fill="#8884d8"
-        />
-        <Bar dataKey="units_consume" stackId="a" fill="#82ca9d" />
+        >
+          <LabelList dataKey="units_consumed" position="insideTop" />
+        </Bar>
+        <Bar
+          dataKey="units_consume"
+          name="Units to Consume"
+          stackId="a"
+          fill="#82ca9d"
+        >
+          <LabelList dataKey="units_consume" position="insideTop" />
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
